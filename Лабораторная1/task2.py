@@ -18,5 +18,4 @@ except ValueError as e:
 try:
     Car("Toyota", "Camry", -1, 30.0)
 except ValueError as e:
-    print(f"Ошибка при создании Car: {e}")
-    
+    print(f"Ошибка при создании Car: {e}") 
