@@ -194,6 +194,7 @@ class Car:
             "fuel_level": self.fuel_level
         }
 
-    if __name__ == "__main__":
-        import doctest
-        doctest.testmod(verbose=True)
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose=True)
