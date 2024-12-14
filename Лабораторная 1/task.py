@@ -1,8 +1,3 @@
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod(verbose=True)
-
-
 class SmartPhone:
     """
     Класс, представляющий смартфон
@@ -26,7 +21,7 @@ class SmartPhone:
         if not isinstance(manufacturer, str) or len(manufacturer.strip()) == 0:
             raise TypeError("Производитель смартфона должен быть непустой строкой.")
         if not isinstance(year_of_manufacture, int) or year_of_manufacture < 1900:
-            raise TypeError("Год выпуска смартфона должен быть больше или равен 1900.")
+            raise ValueError("Год выпуска смартфона должен быть больше или равен 1900.")
 
         self.model = model
         self.manufacturer = manufacturer
@@ -153,7 +148,7 @@ class Car:
             raise ValueError("Пробег не может быть отрицательным")
         self.mileage = mileage
         if fuel_level < 0 or fuel_level > self.TANK_CAPACITY:
-            raise TypeError(f"Уровень топлива должен быть между 0 и {self.TANK_CAPACITY}.")
+            raise ValueError(f"Уровень топлива должен быть между 0 и {self.TANK_CAPACITY}.")
         self.fuel_level = fuel_level
 
     def drive(self, distance: int) -> None:
@@ -173,7 +168,7 @@ class Car:
         fuel_consumption = distance / self.KM_PER_LITER
 
         if fuel_consumption > self.fuel_level:
-            raise TypeError("Недостаточно топлива для преодоления данного расстояния")
+            raise ValueError("Недостаточно топлива для преодоления данного расстояния")
 
     def refill_tank(self) -> float:
         """
@@ -198,3 +193,7 @@ class Car:
             "mileage": self.mileage,
             "fuel_level": self.fuel_level
         }
+
+    if __name__ == "__main__":
+        import doctest
+        doctest.testmod(verbose=True)
