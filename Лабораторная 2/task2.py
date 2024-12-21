@@ -101,12 +101,12 @@ class Library:
             int: Индекс книги в списке.
 
         Исключения:
-            TypeError: Если книга с запрашиваемым идентификатором не существует.
+            ValueError: Если книга с запрашиваемым идентификатором не существует.
         """
         for index, book in enumerate(self.books):
             if book.id == book_id:
                 return index
-        raise TypeError("Книги с запрашиваемым id не существует")
+        raise ValueError("Книги с запрашиваемым id не существует")
 
 
 if __name__ == '__main__':
