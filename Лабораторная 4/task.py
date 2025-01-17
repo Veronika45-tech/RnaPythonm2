@@ -79,6 +79,7 @@ class IPhone(Smartphone):
         """
         return f"iPhone {self.model}, цена: {self.price} USD, iOS версия: {self.ios_version}"
 
+    # Унаследованный метод
     def __repr__(self) -> str:
         """
         Возвращает официальное строковое представление iPhone
@@ -86,7 +87,7 @@ class IPhone(Smartphone):
         Возвращаемое значение:
             str: Официальное строковое представление iPhone
         """
-        return f"{self.__class__.__name__}(model={self.model!r}, price={self.price!r}, ios_version={self.ios_version!r})"
+        return super().__repr__()
 
     def display_info(self) -> str:
         """
@@ -105,6 +106,8 @@ if __name__ == "__main__":
     try:
         iphone = IPhone("13 Pro", 999.99, "iOS 15.0")
         print(iphone)
+        print(iphone.display_info())
+        print(repr(iphone))
     except TypeError as e:
         print(f"Ошибка: {e}")
 
