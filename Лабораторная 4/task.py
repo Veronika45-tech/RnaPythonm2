@@ -18,6 +18,8 @@ class Smartphone:
         """
         self.brand = brand
         self.model = model
+        if price < 0:
+            raise ValueError("Цена не может быть отрицательной")
         self.price = price
 
     def __str__(self) -> str:
@@ -47,13 +49,22 @@ class Smartphone:
         """
         return f"Бренд: {self.brand}, Модель: {self.model}, Цена: {self.price} USD"
 
+    def make_call(self, number: str):
+        """
+        Метод для совершения звонка
+
+        Аргументы:
+            number (str): Номер телефона для звонка
+        """
+        print(f"Звоним на номер {number} со смартфона {self.brand} {self.model}")
+
 
 class IPhone(Smartphone):
     """
     Класс для смартфонов iPhone
 
     Атрибуты:
-        brand (str): Бренд смартфона
+        brand (str): Бренд смартфона (всегда Apple)
         model (str): Модель смартфона
         price (float): Цена смартфона
         ios_version (str): Версия iOS
@@ -79,16 +90,6 @@ class IPhone(Smartphone):
         """
         return f"iPhone {self.model}, цена: {self.price} USD, iOS версия: {self.ios_version}"
 
-    # Унаследованный метод
-    def __repr__(self) -> str:
-        """
-        Возвращает официальное строковое представление iPhone
-
-        Возвращаемое значение:
-            str: Официальное строковое представление iPhone
-        """
-        return super().__repr__()
-
     def display_info(self) -> str:
         """
         Возвращает информацию о iPhone
@@ -99,7 +100,8 @@ class IPhone(Smartphone):
         Причина перегрузки:
             Добавление информации о версии iOS
         """
-        return f"Бренд: {self.brand}, Модель: {self.model}, Цена: {self.price} USD, iOS версия: {self.ios_version}"
+        parent_info = super().display_info()  # Вызов метода родительского класса
+        return f"{parent_info}, iOS версия: {self.ios_version}"
 
 
 if __name__ == "__main__":
@@ -108,15 +110,12 @@ if __name__ == "__main__":
         print(iphone)
         print(iphone.display_info())
         print(repr(iphone))
-    except TypeError as e:
+        iphone.make_call("+79991234567")  # Используем унаследованный метод
+    except ValueError as e:
         print(f"Ошибка: {e}")
 
     try:
         iphone.price = -100
     except ValueError as e:
         print(f"Ошибка: {e}")
-
-    try:
-        iphone.ios_version = "Android 11"
-    except TypeError as e:
-        print(f"Ошибка: {e}")
+        
